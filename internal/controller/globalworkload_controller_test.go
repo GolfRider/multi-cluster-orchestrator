@@ -22,6 +22,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"k8s.io/apimachinery/pkg/api/errors"
+	apiresource "k8s.io/apimachinery/pkg/api/resource"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
@@ -51,7 +52,16 @@ var _ = Describe("GlobalWorkload Controller", func() {
 						Name:      resourceName,
 						Namespace: "default",
 					},
-					// TODO(user): Specify other spec details if needed.
+					Spec: platformv1alpha1.GlobalWorkloadSpec{
+						Image:    "nginx:1.25",
+						Replicas: 2,
+						Resources: platformv1alpha1.ResourceRequirements{
+							CPU:    apiresource.MustParse("100m"),
+							Memory: apiresource.MustParse("128Mi"),
+						},
+						RegionPreference:  []string{"us-west"},
+						PlacementStrategy: platformv1alpha1.Spread,
+					},
 				}
 				Expect(k8sClient.Create(ctx, resource)).To(Succeed())
 			}
