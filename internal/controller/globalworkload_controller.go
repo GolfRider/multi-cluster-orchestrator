@@ -307,11 +307,11 @@ func (r *GlobalWorkloadReconciler) reconcileDelete(
 	// We iterate over current status; if status was stale, the worst case is we
 	// try to delete something that doesn't exist (handled gracefully by
 	// removeDeployment via IsNotFound).
-	for _, placement := range workload.Status.Placements {
-		if err := r.removeDeployment(ctx, workload, placement.ClusterName); err != nil {
+	for _, p := range workload.Status.Placements {
+		if err := r.removeDeployment(ctx, workload, p.ClusterName); err != nil {
 			// Cleanup error — don't remove the finalizer yet. Return the error
 			// so controller-runtime retries.
-			return ctrl.Result{}, fmt.Errorf("cleanup in cluster %s: %w", placement.ClusterName, err)
+			return ctrl.Result{}, fmt.Errorf("cleanup in cluster %s: %w", p.ClusterName, err)
 		}
 	}
 

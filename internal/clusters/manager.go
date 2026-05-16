@@ -117,7 +117,7 @@ func (m *manager) buildClient(ctx context.Context, clusterName string) (client.C
 	// 3. Extract the kubeconfig bytes under the conventional key.
 	kubeconfigBytes, ok := secret.Data["kubeconfig"]
 	if !ok {
-		return nil, fmt.Errorf("Secret %s missing 'kubeconfig' key", secretKey)
+		return nil, fmt.Errorf("secret %s missing 'kubeconfig' key", secretKey)
 	}
 
 	// 4. Parse into a rest.Config.

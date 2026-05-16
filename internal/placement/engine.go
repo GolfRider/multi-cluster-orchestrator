@@ -3,6 +3,7 @@ package placement
 import (
 	"fmt"
 	"math"
+	"slices"
 	"sort"
 
 	platformv1alpha1 "github.com/golfrider/global-workload-orchestrator/api/v1alpha1"
@@ -291,12 +292,7 @@ func (e *Engine) distributeSpread(
 // ----------------------------------------------------------------------------
 
 func containsString(haystack []string, needle string) bool {
-	for _, s := range haystack {
-		if s == needle {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(haystack, needle)
 }
 
 func utilization(cluster *platformv1alpha1.ClusterRegistration) float64 {
