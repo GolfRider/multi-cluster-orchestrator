@@ -109,5 +109,4 @@ See `DESIGN.md` for an exhaustive list of production extensions and the reasonin
 
 ## Status
 
-Prototype, working end-to-end on local `kind`. Demonstrates all goals listed above. Built as a design exploration; not intended for production deployment without the extensions noted in `DESIGN.md`.
-
+Working end-to-end on local kind. Failover, recovery, and lifecycle handling all demonstrated via `make demo`. Future direction discussed in DESIGN.md.
