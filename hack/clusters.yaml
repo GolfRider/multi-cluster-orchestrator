@@ -1,0 +1,17 @@
+apiVersion: platform.platform.local/v1alpha1
+kind: ClusterRegistration
+metadata:
+  name: region-a
+spec:
+  region: us-west
+  kubeconfigSecretRef:
+    name: region-a-kubeconfig
+---
+apiVersion: platform.platform.local/v1alpha1
+kind: ClusterRegistration
+metadata:
+  name: region-b
+spec:
+  region: us-east
+  kubeconfigSecretRef:
+    name: region-b-kubeconfig

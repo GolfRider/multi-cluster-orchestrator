@@ -1,0 +1,14 @@
+apiVersion: platform.platform.local/v1alpha1
+kind: GlobalWorkload
+metadata:
+  name: hello-workload
+spec:
+  image: nginx:1.25
+  replicas: 4
+  resources:
+    cpu: "100m"
+    memory: "128Mi"
+  regionPreference:
+    - us-west
+    - us-east
+  placementStrategy: Spread

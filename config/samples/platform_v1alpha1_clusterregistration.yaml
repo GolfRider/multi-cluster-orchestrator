@@ -1,0 +1,9 @@
+apiVersion: platform.platform.local/v1alpha1
+kind: ClusterRegistration
+metadata:
+  labels:
+    app.kubernetes.io/name: global-workload-orchestrator
+    app.kubernetes.io/managed-by: kustomize
+  name: clusterregistration-sample
+spec:
+  # TODO(user): Add fields here

@@ -1,0 +1,29 @@
+# This rule is not used by the project global-workload-orchestrator itself.
+# It is provided to allow the cluster admin to help manage permissions for users.
+#
+# Grants read-only access to platform.platform.local resources.
+# This role is intended for users who need visibility into these resources
+# without permissions to modify them. It is ideal for monitoring purposes and limited-access viewing.
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: global-workload-orchestrator
+    app.kubernetes.io/managed-by: kustomize
+  name: clusterregistration-viewer-role
+rules:
+- apiGroups:
+  - platform.platform.local
+  resources:
+  - clusterregistrations
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - platform.platform.local
+  resources:
+  - clusterregistrations/status
+  verbs:
+  - get
