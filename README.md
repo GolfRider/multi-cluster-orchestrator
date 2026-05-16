@@ -58,7 +58,7 @@ When a cluster is unreachable during cleanup of an old placement, the reconciler
 
 ## Running
 
-Requires `kind`, `kubectl`, `docker`, Go ≥ 1.21.
+Requires `kind`, `kubectl`, `docker`, Go ≥ 1.25.
 
 ```bash
 # One-time setup: three kind clusters, CRDs installed, target clusters registered
