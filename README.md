@@ -1,6 +1,6 @@
 # multi-cluster-orchestrator
 
-A multi-cluster Kubernetes meta control plane that places stateless workloads across registered clusters with region-aware scheduling and automated failover.
+A multi-cluster **Kubernetes** meta control plane that places stateless workloads across registered clusters with region-aware scheduling and automated failover.
 
 Declare a workload once via a custom resource; the controller decides which clusters host it, propagates it to each via per-cluster kubeconfigs, and migrates it across clusters when failures occur.
 
