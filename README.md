@@ -61,7 +61,7 @@ When a cluster is unreachable during cleanup of an old placement, the reconciler
 Requires `kind`, `kubectl`, `docker`, Go ≥ 1.25.
 
 ```bash
-# One-time setup: three kind clusters, CRDs installed, target clusters registered
+# One-time setup: creates three kind clusters, installs CRDs, registers target clusters
 make demo-setup
 
 # Terminal 1: controller
@@ -90,14 +90,14 @@ DESIGN.md              detailed design rationale and production tradeoffs
 
 ## Key design decisions
 
-A small set of choices shape the rest of the system. Each is discussed in `DESIGN.md`.
+A small set of choices shape the rest of the system. Each is discussed in [DESIGN.md](DESIGN.md).
 
 - **Two controllers, single-writer status fields.** The GlobalWorkload reconciler writes its own status and `AllocatedCapacity` on registrations. The ClusterRegistration reconciler writes `Healthy`, `ObservedCapacity`, `LastProbeTime`. No field is written by more than one controller.
 - **Placement engine is a pure function.** Decisions are data. The reconciler is responsible for applying plans; the engine has no I/O.
 - **Headroom is an unconditional penalty.** Drift safety (don't pick near-full clusters) is applied regardless of placement strategy. Structural, not strategic.
 - **Cluster unreachability is recoverable, not fatal.** Probe failures and cleanup failures on unreachable target clusters log-and-continue rather than block.
 - **Finalizers gate deletion.** A `GlobalWorkload` cannot complete deletion until child Deployments across all target clusters are cleaned up.
-- **Direct K8s API client per cluster.** The prototype uses Mode 1 (direct API client); production patterns like hub-and-spoke agents are discussed as graduation paths in `DESIGN.md`.
+- **Direct K8s API client per cluster.** The prototype uses Mode 1 (direct API client); production patterns like hub-and-spoke agents are discussed as graduation paths in [DESIGN.md](DESIGN.md).
 
 ## What this is not
 
@@ -109,4 +109,4 @@ See `DESIGN.md` for an exhaustive list of production extensions and the reasonin
 
 ## Status
 
-Working end-to-end on local kind. Failover, recovery, and lifecycle handling all demonstrated via `make demo`. Future direction discussed in DESIGN.md.
+Working end-to-end on local kind. Failover, recovery, and lifecycle handling all demonstrated via `make demo`. Future direction discussed in [DESIGN.md](DESIGN.md).
